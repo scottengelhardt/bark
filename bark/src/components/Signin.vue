@@ -1,10 +1,12 @@
 <template>
   <div style="height:100vh">
     <div class="leftSide">
+      <h1>Welcome to</h1>
       <div class="inputContainer">
         <div class="inputItem">
-          <span class="lbl">First Name</span>
+          <label for="first" class="lbl">First Name</label>
           <input 
+            id="first"
             class="inputField" 
             type="text" 
             v-model="first" 
@@ -12,8 +14,9 @@
           >
         </div>
         <div class="inputItem">
-          <span class="lbl">Last Name</span>
+          <label for="last" class="lbl">Last Name</label>
           <input 
+            id="last"
             class="inputField" 
             type="text" 
             v-model="last" 
@@ -21,8 +24,9 @@
           >
         </div>
         <div class="inputItem">
-          <span class="lbl">Email Address</span>
+          <label for="email" class="lbl">Email Address</label>
           <input 
+            id="email"
             class="inputField" 
             type="text" 
             v-model="email" 
@@ -30,9 +34,10 @@
           >
         </div>
         <div class="inputItem">
-          <span class="lbl">Password</span>
-          <span @click="reveal = !reveal" style="cursor: pointer">👁</span>
+          <label for="password" class="lbl">Password</label>
+          <!-- <span @click="reveal = !reveal" style="cursor: pointer">👁</span> -->
           <input 
+            id="password"
             class="inputField" 
             style="margin-bottom:4px"
             :type="reveal ? 'text' : 'password'" 
@@ -42,7 +47,7 @@
           <div v-if="passWarning">
             <small class="warning">{{passWarning}}</small>
           </div>
-          <input 
+          <!-- <input 
             v-model="passLvl" 
             @input="generatePassword" 
             type="range" 
@@ -52,10 +57,10 @@
             class="slider" 
             :style="accentColor"
             style="margin-bottom:12px"
-          >
+          > -->
         </div>
-        <div class="inputItem" style="flex-basis:100%; width:50%">
-          <button class="inputField submitBtn" >Create Account</button>
+        <div class="inputItem" style="flex-basis:100%; margin-top:20px">
+          <button class="inputField submitBtn">Create Account</button>
         </div>
       </div>
     </div>
@@ -144,25 +149,23 @@ export default {
 
 <style scoped>
   .inputField {
-    margin: 15px auto;
+    margin: 5px auto;
     margin-bottom: 15px;
     margin-top: 0;
-    font-size: 1.5em !important;
+    font-size: 1.2em !important;
     border: 2px solid rgba(0,0,0,0.5);
     padding: 5px 10px;
     border-radius: 10px;
-    width: 80%;
+    float: left;
   }
   .inputItem {
     flex-basis: 50%;
     flex-grow: 0;
   }
   .inputContainer {
-    background:rgba(0, 0, 0, .2);
-    border-radius: 15px 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
     display: flex;
-    margin: 1em;
+    margin-top: 3em;
+    margin: 0.5em;
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
@@ -170,22 +173,21 @@ export default {
   .submitBtn {
     color: white;
     background: rgba(58, 96, 115, 1);
-    width:40%;
+    width: 80%;
   }
   .leftSide {
-    width: 50%;
+    width: 70%;
     height: 100vh;
     background: linear-gradient(rgb(225, 242, 255) 0%, rgb(255, 255, 255) 77.69%);
+    margin-right:0.5em;
   }
   .lbl {
-    color: white;
-    font-weight: bold;
     font-size: 1.3em;
+    float: left;
+    text-align: left;
+    width:100%;
   }
   .warning {
     color: red;
   }
 </style>
-
-
-// scroll bar for generate password + password strength
