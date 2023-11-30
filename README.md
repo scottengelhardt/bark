@@ -1,24 +1,26 @@
-# README
+# Scott's Software Solutions
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Are you looking for your next Software developer? Well look no More!
 
-Things you may want to cover:
+By downloading this repo and running the following commands, you will gain access to S3 where you can sign up and learn more about Scott's Engineering Prowless.
 
-* Ruby version
+What are you waiting for?
 
-* System dependencies
 
-* Configuration
+Steps:
+1. Clone this repo
+2. cd into the root of the repo
+3. Run `bundle install`
+4. Run `bundle exec rake db:create`
+5. Run `bundle exec rake db:migrate`
 
-* Database creation
 
-* Database initialization
+To run this project you will need two terminal windows:
+1. Run `Rails server` from the root of the project
+2. Run `cd bark && yarn dev` from the root of the project
 
-* How to run the test suite
+You should now be able to head to localhost:8080 and view the S3 🎉
 
-* Services (job queues, cache servers, search engines, etc.)
+![S3](./bark/src/assets/s3.png)
 
-* Deployment instructions
 
-* ...
