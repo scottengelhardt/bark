@@ -1,72 +1,107 @@
 <template>
   <div style="height:100vh">
-    <div class="leftSide">
-      <h1>Welcome to</h1>
-      <div class="inputContainer">
-        <div class="inputItem">
-          <label for="first" class="lbl">First Name</label>
-          <input 
-            id="first"
-            class="inputField" 
-            type="text" 
-            v-model="first" 
-            placeholder="First Name"
-          >
-        </div>
-        <div class="inputItem">
-          <label for="last" class="lbl">Last Name</label>
-          <input 
-            id="last"
-            class="inputField" 
-            type="text" 
-            v-model="last" 
-            placeholder="Last Name"
-          >
-        </div>
-        <div class="inputItem">
-          <label for="email" class="lbl">Email Address</label>
-          <input 
-            id="email"
-            class="inputField" 
-            type="text" 
-            v-model="email" 
-            placeholder="Email Address"
-          >
-        </div>
-        <div class="inputItem">
-          <label for="password" class="lbl">Password</label>
-          <!-- <span @click="reveal = !reveal" style="cursor: pointer">👁</span> -->
-          <input 
-            id="password"
-            class="inputField" 
-            style="margin-bottom:4px"
-            :type="reveal ? 'text' : 'password'" 
-            v-model="password" 
-            placeholder="Password"
-          >
-          <div v-if="passWarning">
-            <small class="warning">{{passWarning}}</small>
+    <v-layout row wrap style="text-align:center">
+      <v-flex class="leftSide" xs12 sm6> 
+        <img class="mt-5" src="../assets/s3.png" /> 
+        <h1 class="mt-5">Join the Revolution</h1>
+        <v-layout row wrap style="justify-content:center" class="ma-4">
+          <v-flex xs10 md6>
+            <label for="first" class="lbl">First Name</label>
+            <v-text-field 
+              id="first"
+              class="inputField" 
+              type="text" 
+              v-model="first" 
+              single-line
+              outline
+              placeholder="First Name"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs10 md6>
+            <label for="last" class="lbl">Last Name</label>
+            <v-text-field 
+              id="last"
+              class="inputField" 
+              type="text" 
+              v-model="last" 
+              single-line
+              outline
+              placeholder="Last Name"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs10 md6>
+            <label for="email" class="lbl">Email Address</label>
+            <v-text-field 
+              id="email"
+              class="inputField" 
+              type="text" 
+              v-model="email" 
+              single-line
+              outline
+              placeholder="Email Address"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs10 md6>
+            <label for="password" class="lbl">Password</label>
+            <v-text-field 
+              id="password"
+              class="inputField" 
+              :type="reveal ? 'text' : 'password'" 
+              single-line
+              outline
+              :hint="passWarning"
+              v-model="password" 
+              placeholder="Password"
+              :append-icon="!reveal ? 'fa-eye-slash' : 'fa-eye'"
+              @click:append="reveal = !reveal"
+            ></v-text-field>
+            <!-- <v-text-field 
+              v-model="passLvl" 
+              @input="generatePassword" 
+              type="range" 
+              min="0" 
+              max="10" 
+              value="0" 
+              class="slider" 
+              :style="accentColor"
+              style="margin-bottom:12px"
+            > -->
+          </v-flex>
+          <v-flex xs12  style="text-align: -webkit-center">
+            <v-btn round class="submitBtn" color="#1942D8">Create Account</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+      <v-flex xs12 sm6 class="rightSide">
+        <div class="mt-5 ml-4">
+          <h1 style="font-size:3.5em">Stop Barking Up The Wrong Tree</h1>
+          <span class="mt-1 smallHeader">10X your engineering team with Scott</span>
+          <div class="mt-5">
+            <icon class="fa-solid fa-bolt icon" style="color:yellow"></icon>
+            <span class="smallHeader">Lightning Fast Development</span>
           </div>
-          <!-- <input 
-            v-model="passLvl" 
-            @input="generatePassword" 
-            type="range" 
-            min="0" 
-            max="10" 
-            value="0" 
-            class="slider" 
-            :style="accentColor"
-            style="margin-bottom:12px"
-          > -->
+          <div class="mt-2">
+            <icon class="fa-solid fa-bug-slash icon" style="color:red"></icon>
+            <span class="smallHeader">Zero Bug Tolerance</span>
+          </div>
+          <div class="mt-2">
+            <icon class="fa-solid fa-gem icon" style="color:white"></icon>
+            <span class="smallHeader">Passion for Excellence </span>
+          </div>
+          <div class="mt-5" style="text-align:center">
+             <v-carousel hide-controls hide-delimiters style="height:auto;text-align:center; box-shadow: none;" >
+              <v-carousel-item
+                v-for="(item,i) in fans"
+                :key="i"
+                fade
+                height="200px"
+              >
+              <img :src="require(`../assets/${item}`)" style="max-width:100%; object-fit:contains" /></v-carousel-item>
+            </v-carousel> 
+          </div>
         </div>
-        <div class="inputItem" style="flex-basis:100%; margin-top:20px">
-          <button class="inputField submitBtn">Create Account</button>
-        </div>
-      </div>
-    </div>
-    <div style="width:40%">
-
-    </div>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
@@ -82,6 +117,7 @@ export default {
       passLvl: 0,
       reveal: false,
       watchPass: true,
+      fans: ['brett.png', 'tyler.png', 'zack.png'],
     }
   }, 
   methods: {
@@ -105,17 +141,6 @@ export default {
     },
   },
   computed: {
-    accentColor(){
-      let st = 'accent-color:'
-      if (this.passLvl < 3){
-        st += 'green'
-      } else if(this.passLvl < 7){
-        st += 'blue'
-      } else {
-        st += 'red'
-      }
-      return st
-    },
     passWarning(){
       if (this.password.length === 0){
         return ""
@@ -151,35 +176,24 @@ export default {
   .inputField {
     margin: 5px auto;
     margin-bottom: 15px;
-    margin-top: 0;
     font-size: 1.2em !important;
-    border: 2px solid rgba(0,0,0,0.5);
-    padding: 5px 10px;
     border-radius: 10px;
     float: left;
-  }
-  .inputItem {
-    flex-basis: 50%;
-    flex-grow: 0;
-  }
-  .inputContainer {
-    display: flex;
-    margin-top: 3em;
-    margin: 0.5em;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width: 100%;
+    width:95%;
   }
   .submitBtn {
     color: white;
-    background: rgba(58, 96, 115, 1);
-    width: 80%;
+    background: #1942D8;
+    border: 1px white solid !important;
   }
-  .leftSide {
-    width: 70%;
+  .leftSide, .rightSide {
     height: 100vh;
     background: linear-gradient(rgb(225, 242, 255) 0%, rgb(255, 255, 255) 77.69%);
-    margin-right:0.5em;
+  }
+  .rightSide {
+    background: #1942D8;
+    color: white; 
+    text-align: left;
   }
   .lbl {
     font-size: 1.3em;
@@ -187,7 +201,14 @@ export default {
     text-align: left;
     width:100%;
   }
-  .warning {
+  .passWarning {
     color: red;
+  }
+  .smallHeader {
+    font-size: 1.5em;
+  }
+  .icon {
+    font-size:xx-large; 
+    vertical-align: middle; 
   }
 </style>
