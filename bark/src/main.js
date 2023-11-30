@@ -5,12 +5,9 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import VTooltip  from 'v-tooltip';
-
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
-Vue.use(VTooltip)
 
 new Vue({
   el: '#app',

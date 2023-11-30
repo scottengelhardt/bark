@@ -14,6 +14,8 @@
               v-model="first" 
               single-line
               outline
+              :hint="fnWarn"
+              persistent-hint
               placeholder="First Name"
             ></v-text-field>
           </v-flex>
@@ -26,6 +28,8 @@
               v-model="last" 
               single-line
               outline
+              :hint="lnWarn"
+              persistent-hint
               placeholder="Last Name"
             ></v-text-field>
           </v-flex>
@@ -38,53 +42,56 @@
               v-model="email" 
               single-line
               outline
+              :hint="emWarn"
+              persistent-hint
               placeholder="Email Address"
             ></v-text-field>
           </v-flex>
           <v-flex xs10 md6>
-            <label for="password" class="lbl">Password</label>
+            <label for="password" class="lbl">
+              Password
+              <span style="float:right" class="mr-3">
+                <icon 
+                class="fa-solid fa-gear" 
+                style="color: grey; cursor: pointer"
+                @click="generatePassword"
+              ></icon></span>
+            </label>
             <v-text-field 
               id="password"
               class="inputField" 
               :type="reveal ? 'text' : 'password'" 
               single-line
               outline
-              :hint="passWarning"
+              :hint="psWarn"
+              persistent-hint
               v-model="password" 
               placeholder="Password"
               :append-icon="!reveal ? 'fa-eye-slash' : 'fa-eye'"
               @click:append="reveal = !reveal"
             ></v-text-field>
-            <!-- <v-text-field 
-              v-model="passLvl" 
-              @input="generatePassword" 
-              type="range" 
-              min="0" 
-              max="10" 
-              value="0" 
-              class="slider" 
-              :style="accentColor"
-              style="margin-bottom:12px"
-            > -->
           </v-flex>
           <v-flex xs12  style="text-align: -webkit-center">
-            <v-btn round class="submitBtn" color="#1942D8">Create Account</v-btn>
+            <v-btn large round class="submitBtn" color="#1942D8" @click="submit">Create Account</v-btn>
+            <div v-if="submitError" style="color:red" class="smallHeader mt-3">
+              {{submitError}}
+            </div>
           </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs12 sm6 class="rightSide">
-        <div class="mt-5 ml-4">
+        <div class="mt-5 ml-5">
           <h1 style="font-size:3.5em">Stop Barking Up The Wrong Tree</h1>
           <span class="mt-1 smallHeader">10X your engineering team with Scott</span>
           <div class="mt-5">
             <icon class="fa-solid fa-bolt icon" style="color:yellow"></icon>
             <span class="smallHeader">Lightning Fast Development</span>
           </div>
-          <div class="mt-2">
+          <div class="mt-3">
             <icon class="fa-solid fa-bug-slash icon" style="color:red"></icon>
             <span class="smallHeader">Zero Bug Tolerance</span>
           </div>
-          <div class="mt-2">
+          <div class="mt-3 mb-5">
             <icon class="fa-solid fa-gem icon" style="color:white"></icon>
             <span class="smallHeader">Passion for Excellence </span>
           </div>
@@ -106,6 +113,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'SignIn',
   data () {
@@ -114,46 +122,109 @@ export default {
       first: '',
       last: '',
       password: '',
-      passLvl: 0,
       reveal: false,
-      watchPass: true,
       fans: ['brett.png', 'tyler.png', 'zack.png'],
+      fnWarn: '',
+      lnWarn: '',
+      emWarn: '',
+      hasSubmit: false,
+      submitError: false,
     }
   }, 
   methods: {
     generatePassword(){
-      this.watchPass = false
-      if (this.passLvl == 0){
-        this.watchPass = true
-        return
-      }
+      this.password = ''
+      this.reveal = true
       let lower = 'abcdefghijklmnopqrstuvwxyz'
       let upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
       let numbers = '0123456789'
       let special = '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\'
       let all = lower.concat(upper, numbers, special)
-      let lvl = 8 + this.passLvl * 2 - this.password.length
-      for (var i = 0; i < lvl; i++){
+      for (var i = 0; i < 20; i++){
         let num = Math.floor(Math.random() * all.length)
         this.password += all[num]
       }
-      this.watchPass = true
+      if (this.needLower){
+        this.password += lower[Math.floor(Math.random() * lower.length)]
+      }
+      if (this.needUpper){
+        this.password += upper[Math.floor(Math.random() * upper.length)]
+      }
+      if (this.needNumber){
+        this.password += numbers[Math.floor(Math.random() * numbers.length)]
+      }
+      if (this.needSpecial){
+        this.password += special[Math.floor(Math.random() * special.length)]
+      }
+      setTimeout(() => {
+        this.reveal = false
+      },200) 
     },
+    submit(){
+      this.hasSubmit = true
+      let hasErr = false
+      if (!this.first){
+        hasErr = true
+        this.fnWarn = 'First Name Required'
+      }
+      if (!this.last){
+        hasErr = true
+        this.lnWarn = 'Last Name Required'
+      }
+      if (!this.isValidEmail){
+        hasErr = true
+        this.emWarn = 'Invalid Email'
+      }
+      if (this.psWarn){
+        hasErr = true
+      }
+      if(hasErr){
+        return
+      }
+      axios.post('http://localhost:3000/user', {
+        user: {
+          first: this.first,
+          last: this.last,
+          email: this.email,
+          password: this.password,
+        }
+      })
+      .then(function (response) {
+        window.location.href = '/welcome'
+      })
+      .catch((error) => {
+        this.submitError = error.response.data.error
+      });
+    }
   },
   computed: {
-    passWarning(){
-      if (this.password.length === 0){
-        return ""
+    needLower(){
+      return this.password ? this.password.toUpperCase() === this.password: false
+    },
+    needUpper(){
+      return this.password ? this.password.toLowerCase() === this.password : false
+    },
+    needNumber(){
+      return this.password ? !/\d/.test(this.password) : false
+    },
+    needSpecial(){
+      return this.password ? !/[^\w\s]/.test(this.password) : false
+    },
+    psWarn(){
+      if (this.password.length === 0 && this.hasSubmit){
+        return 'Password Required'
+      } else if (this.password.length === 0 && !this.hasSubmit){
+        return ''
       } else if (this.password.length < 8){
         return "Password must be 8+ characters"
       }
-      if (this.password.toUpperCase() === this.password){
+      if (this.needLower){
         return "Password must contain lower case letters"
-      } else if (this.password.toLowerCase() === this.password){
+      } else if (this.needUpper){
         return "Password must contain upper case letters"
-      } else if (!/\d/.test(this.password)){
+      } else if (this.needNumber){
         return "Password must contain numbers"
-      } else if (!/[^\w\s]/.test(this.password)){
+      } else if (this.needSpecial){
         return "Password must contain special characters"
       }
     },
@@ -163,10 +234,14 @@ export default {
 		},
   },
   watch: {
-    password(){
-      if (this.watchPass){
-        this.passLvl = Math.floor((this.password.length - 8) / 2)
-      }
+    first(){
+      this.fnWarn = ''
+    },
+    last(){
+      this.lnWarn = ''
+    },
+    email(){
+      this.emWarn = ''
     }
   }
 }
@@ -211,4 +286,9 @@ export default {
     font-size:xx-large; 
     vertical-align: middle; 
   }
+  .v-tooltip__content {
+  font-size: 50px !important;
+  opacity: 1 !important;
+  display: block !important;
+}
 </style>

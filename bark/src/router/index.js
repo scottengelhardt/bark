@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Signin from '@/components/Signin'
+import Welcome from '@/components/Welcome'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Signin',
-      component: Signin
-    }
+      component: Signin,
+    },
+    {
+      path: '/welcome',
+      component: Welcome,
+    },
   ]
 })
