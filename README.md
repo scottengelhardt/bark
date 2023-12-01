@@ -6,6 +6,9 @@ By downloading this repo and running the following commands, you will gain acces
 
 What are you waiting for?
 
+System Requirements: 
+1. Ruby 2.7.1
+2. Yarn
 
 Getting Started:
 1. Clone this repo and extract it
