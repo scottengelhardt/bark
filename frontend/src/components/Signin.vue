@@ -50,7 +50,7 @@
           <v-flex xs10 md6>
             <label for="password" class="lbl">
               Password
-              <span style="float:right" class="mr-3">
+              <span style="float:right" class="mr-3" v-tooltip="'Generate Password'">
                 <icon 
                 class="fa-solid fa-gear" 
                 style="color: grey; cursor: pointer"
@@ -72,7 +72,7 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs12  style="text-align: -webkit-center">
-            <v-btn large round class="submitBtn" color="#1942D8" @click="submit">Create Account</v-btn>
+            <v-btn large round class="submitBtn" color="#1942D8" @click="submit" :disabled="hasFormError">Create Account</v-btn>
             <div v-if="submitError" style="color:red" class="smallHeader mt-3">
               {{submitError}}
             </div>
@@ -198,6 +198,9 @@ export default {
     }
   },
   computed: {
+    hasFormError(){
+      return !this.first || !this.last || !this.isValidEmail || !this.password || this.needLower || this.needUpper || this.needNumber || this.needSpecial 
+    },
     needLower(){
       return this.password ? this.password.toUpperCase() === this.password: false
     },
@@ -229,7 +232,7 @@ export default {
       }
     },
     isValidEmail(){
-			var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+			var re = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/; // trust me 
 			return re.test(this.email)
 		},
   },
@@ -286,9 +289,4 @@ export default {
     font-size:xx-large; 
     vertical-align: middle; 
   }
-  .v-tooltip__content {
-  font-size: 50px !important;
-  opacity: 1 !important;
-  display: block !important;
-}
 </style>

@@ -16,8 +16,8 @@ Getting Started:
 
 
 To run this project you will need two terminal windows:
-1. Run `rails server` from the root of the project
-2. Run `cd bark && yarn install && yarn start` from the root of the project
+1. Run `rails s` from the root of the project
+2. Run `cd frontend && yarn install && yarn start` from the root of the project
 
 You should now be able to head to localhost:8080 and view the S3 🎉
 

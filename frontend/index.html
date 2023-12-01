@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://kit.fontawesome.com/e31b866d55.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Welcome to  S3</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<style lang="scss" is:global> 
+  .tooltip {
+    display: block !important;
+    z-index: 10000;
+    font-family: "Heebo", sans-serif !important;
+    font-size: 16px;
+    .tooltip-inner {
+      color: white;
+      background-color:#1942D8;
+      border-radius: 3px;
+      padding: 10px 15px;
+      border: 3px solid black;
+      border-radius: 10px;
+      box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+      pointer-events: none;
+    }
+
+    .tooltip-arrow {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      position: absolute;
+      margin: 5px;
+      border-color: black;
+      z-index: 1;
+    }
+
+    &[x-placement^="top"] {
+      margin-bottom: 10px;
+
+      .tooltip-arrow {
+        border-width: 10px 10px 0 10px;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-bottom-color: transparent !important;
+        bottom: -7px;
+        left: calc(50% - 10px);
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &[aria-hidden="true"] {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.15s, visibility 0.15s;
+    }
+
+    &[aria-hidden="false"] {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.15s;
+    }
+  }
+</style>

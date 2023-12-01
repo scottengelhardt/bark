@@ -7,6 +7,13 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.23.5.tgz#37dee97c4752af148e1d38c34b856b2507660563"
   integrity sha512-hOOqoiNXrmGdFbhgCzu6GiURxUgM27Xwd/aPuu8RfHEZPBzL1Z54okAHAQjXfcQNwvrlkAmAp4SlRTZ45vlthQ==
 
+"@babel/runtime@^7.13.10":
+  version "7.23.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.5.tgz#11edb98f8aeec529b82b211028177679144242db"
+  integrity sha512-NdUTHcPe4C99WxPub+K9l9tK5/lV4UXIoaHSYgzco9BCyjKAAwzdBI+wWtYqHt7LJdbo74ZjRPJgzVweq1sz0w==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@sinonjs/commons@^1", "@sinonjs/commons@^1.3.0", "@sinonjs/commons@^1.7.0":
   version "1.8.6"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.6.tgz#80c516a4dc264c2a69115e7578d62581ff455ed9"
@@ -6382,6 +6389,11 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+popper.js@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
 portfinder@^1.0.13, portfinder@^1.0.9:
   version "1.0.32"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.32.tgz#2fe1b9e58389712429dc2bea5beb2146146c7f81"
@@ -7365,6 +7377,11 @@ regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
+
+regenerator-runtime@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.0.tgz#5e19d68eb12d486f797e15a3c6a918f7cec5eb45"
+  integrity sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==
 
 regenerator-transform@^0.10.0:
   version "0.10.1"
@@ -8860,6 +8877,16 @@ uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+v-tooltip@^2.0.2:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/v-tooltip/-/v-tooltip-2.1.3.tgz#281c2015d1e73787f13c8956aa295b8c3a73f261"
+  integrity sha512-xXngyxLQTOx/yUEy50thb8te7Qo4XU6h4LZB6cvEfVd9mnysUxLEoYwGWDdqR+l69liKsy3IPkdYff3J1gAJ5w==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    lodash "^4.17.21"
+    popper.js "^1.16.1"
+    vue-resize "^1.0.1"
+
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
@@ -8930,6 +8957,13 @@ vue-loader@^13.3.0:
     vue-style-loader "^3.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-resize@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-resize/-/vue-resize-1.0.1.tgz#c120bed4e09938771d622614f57dbcf58a5147ee"
+  integrity sha512-z5M7lJs0QluJnaoMFTIeGx6dIkYxOwHThlZDeQnWZBizKblb99GSejPnK37ZbNE/rVwDcYcHY+Io+AxdpY952w==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+
 vue-router@^3.0.1:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.6.5.tgz#95847d52b9a7e3f1361cb605c8e6441f202afad8"
@@ -8955,11 +8989,6 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
-
-vue-tooltip-v@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/vue-tooltip-v/-/vue-tooltip-v-0.0.5.tgz#d4b1d9929fc9c7d9e4371fc4453767ecaa2c4adb"
-  integrity sha512-VXsj2/wnVrQe77ol4AzEPk7VABA4tXvsZjDKrDU9BTDKQf9C0wMcbhciddtO/9PI0CJMM+L8ggNNwutZgkLMXg==
 
 vue@^2.5.2:
   version "2.7.15"
