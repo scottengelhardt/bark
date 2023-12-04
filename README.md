@@ -22,6 +22,8 @@ To run this project you will need two terminal windows:
 1. Run `rails s` from the root of the project
 2. Run `cd frontend && yarn install && yarn start` from the root of the project
 
+Password and email validation is configured for this project. Simply run `rails t` to run the built in tests. If you would like to add additional test cases you can edit `./test/models/user_tests.rb`.
+
 You should now be able to head to localhost:8080 and view the S3 🎉
 
 Additional Assumptions: 
