@@ -6,7 +6,9 @@ class User < ApplicationRecord
 
   private
   def valid_password
-    if self.password.length < 8
+    if self.password.nil?
+      errors.add(:password, "required")
+    elsif self.password.length < 8
       errors.add(:password, "length")
     elsif self.password.upcase == self.password
       errors.add(:password, "needs lower")
@@ -18,9 +20,11 @@ class User < ApplicationRecord
       errors.add(:password, "needs special")
     end
   end
-
+  
   def valid_email
-    if !self.email.match(/(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/)
+    if self.email.nil?
+      errors.add(:email, "required")
+    elsif !self.email.match(/(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/)
       errors.add(:email, "invalid")
     end
   end
