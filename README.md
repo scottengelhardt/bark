@@ -1,6 +1,6 @@
 # Scott's Software Solutions
 
-Are you looking for your next Software developer? Well look no More!
+Are you looking for your next software engineer? Well look no more!
 
 By downloading this repo and running the following commands, you will gain access to S3 where you can sign up and learn more about Scott's engineering prowess.
 
