@@ -38,7 +38,7 @@ class UsersTest < ActiveSupport::TestCase
     check_fail(create_user(pass, em), pass)
   end
   
-  test "need em" do
+  test "need email" do
     pass = 'aaaaaaaaaA1!'
     em = nil
     check_fail(create_user(pass, em), em)
@@ -62,10 +62,23 @@ class UsersTest < ActiveSupport::TestCase
     check_fail(create_user(pass, em), em)
   end
   
-  test "need unique em" do
+  test "need unique email" do
     pass = 'aaaaaaaaaA1!'
     em = 'scott_engelhardt@outlook.com'
     u = create_user(pass, em)
+    if u.save
+      check_fail(create_user(pass, em), em)
+    else
+      puts '❌ Some error occured'
+      assert false
+    end
+  end
+
+  test "need unique email caps" do
+    pass = 'aaaaaaaaaA1!'
+    em = 'Scott_Engelhardt@outlook.com'
+    u = create_user(pass, em)
+    em = 'scott_engelhardt@outlook.com'
     if u.save
       check_fail(create_user(pass, em), em)
     else
