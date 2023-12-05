@@ -2,7 +2,7 @@
 
 Are you looking for your next Software developer? Well look no More!
 
-By downloading this repo and running the following commands, you will gain access to S3 where you can sign up and learn more about Scott's Engineering Prowess.
+By downloading this repo and running the following commands, you will gain access to S3 where you can sign up and learn more about Scott's engineering prowess.
 
 What are you waiting for?
 
@@ -22,7 +22,9 @@ To run this project you will need two terminal windows:
 1. Run `rails s` from the root of the project
 2. Run `cd frontend && yarn install && yarn start` from the root of the project
 
-You should now be able to head to localhost:8080 and view the S3 🎉
+Password and email validation is configured for this project. Simply run `rails t` to run the built in tests. If you would like to add additional test cases you can edit `./test/models/user_tests.rb`.
+
+You should now be able to head to localhost:8080 🎉
 
 Additional Assumptions: 
 1. Each user should have a first name, last name, email address, and password
